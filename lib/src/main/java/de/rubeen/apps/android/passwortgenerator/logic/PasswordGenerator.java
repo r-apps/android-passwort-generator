@@ -8,7 +8,7 @@ public class PasswordGenerator implements IPasswordGenerator {
             isDefaultSpecialChars = true;
     private final String defaultSpecialChars = null;
     private final String numbers = "1234567890", smallChars = "abcdefghijklmopqrstuvwxyz",
-            largeChars = smallChars.toUpperCase(), specialChars = "";
+            largeChars = smallChars.toUpperCase(), specialChars = "*/-.,=";
 
     //***** INTERFACE IPasswordGenerator BEGIN *****//
 

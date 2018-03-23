@@ -30,6 +30,8 @@
     <string name="pref_password_numbers_description">!numbers_available_DESCRIPTION</string>
     <string name="pref_password_specialChars_EXTRA">!specialChars_EXTRA</string>
     <string name="pref_password_letters">!password_letters</string>
+    <string name="pref_password_specialChars">!special_Chars</string>
+    <string name="pref_password_specialChars_description">!Special_Chars Description</string>
     <string-array name="pref_example_list_titles">
         <item>Always</item>
         <item>When possible</item>

@@ -1,11 +1,11 @@
 package de.rubeen.apps.android.passwortgenerator;
 
-import android.app.Fragment;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,22 +20,22 @@ import android.widget.*;
 import de.rubeen.apps.android.passwortgenerator.Persistence.PasswordHistoryDatabase;
 import de.rubeen.apps.android.passwortgenerator.logic.IPasswordObject;
 import de.rubeen.apps.android.passwortgenerator.logic.PasswordGenerator;
-import de.rubeen.apps.android.passwortgenerator.logic.PasswordObject;
 
 public class MainActivity extends AppCompatActivity {
 
     //TODO: Settings
     //TODO: Expand
 
+    private final int length = 15;
+    private final History history = History.getInstance();
     private View layout_home, layout_history, layout_settings;
     private String mToolbarTitle;
     private BottomNavigationView navigation;
     private EditText passwordBox;
     private PasswordGenerator generator = new PasswordGenerator();
-    private final int length = 15;
-    private final History history = History.getInstance();
     private PasswordHistoryDatabase database;
     private HistoryAdapter historyAdapter;
+    private SharedPreferences preferences;
 
 
     @Override
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setupWidgets();
         setupActionBars();
         setupView();
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         setupDatabase();
         //TEST:
@@ -239,7 +240,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fillPasswordBox() {
-        IPasswordObject passwordObject = generator.generatePassword(length);
+        String letters = preferences.getString("password_Letters", null);
+        String letters_small = getResources().getStringArray(R.array.pref_password_letters_list_values)[0];
+        String letters_large = getResources().getStringArray(R.array.pref_password_letters_list_values)[1];
+        String letters_mixed = getResources().getStringArray(R.array.pref_password_letters_list_values)[2];
+
+        int length = Integer.parseInt(preferences.getString("password_length", "0"));
+        boolean isNumbers = preferences.getBoolean("password_numbers", false);
+        boolean isSmallChars = letters.equals(letters_small) || letters.equals(letters_mixed);
+        boolean isLargeChars = letters.equals(letters_large) || letters.equals(letters_mixed);
+        boolean isSpecialChars = preferences.getBoolean("password_specialChars", false);
+        String extraChars = preferences.getString("password_extra_specialChars", null);
+        IPasswordObject passwordObject =
+                generator.generatePassword(length, isNumbers, isSmallChars, isLargeChars, isSpecialChars, extraChars);
         history.addPasswordObject(passwordObject, this);
         passwordBox.setText(passwordObject.getPassword());
     }

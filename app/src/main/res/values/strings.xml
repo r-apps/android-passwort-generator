@@ -13,18 +13,7 @@
 
     <!-- Strings related to Settings -->
 
-    <!-- Example General settings -->
     <string name="pref_header_general">General</string>
-
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact based on your message
-        history
-    </string>
-
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
     <string name="pref_password_length">!Password_LENGTH</string>
     <string name="pref_password_numbers">!numbers_AVAILABLE</string>
     <string name="pref_password_numbers_description">!numbers_available_DESCRIPTION</string>
@@ -32,28 +21,6 @@
     <string name="pref_password_letters">!password_letters</string>
     <string name="pref_password_specialChars">!special_Chars</string>
     <string name="pref_password_specialChars_description">!Special_Chars Description</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="pref_example_multi_titles">
-        <item>Aaaaaa</item>
-        <item>Bbbbbb</item>
-        <item>Cccccc</item>
-    </string-array>
-
-    <string-array name="pref_example_multi_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
 
     <string-array name="pref_password_letters_list_titles">
         <item>!small_Letters</item>

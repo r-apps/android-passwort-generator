@@ -9,4 +9,19 @@
     <string name="title_noPasswordName">Unnamed</string>
     <string name="title_settings">Settings</string>
     <string name="toast_passwordCopied">Password copied!</string>
+    <string name="cab_delete">delete items</string>
+    <string name="pref_header_general">General</string>
+    <string name="pref_password_length">Password length</string>
+    <string name="pref_password_letters">Letters</string>
+    <string name="pref_password_numbers">Numbers available</string>
+    <string name="pref_password_numbers_description">Shall the password contain numbers?</string>
+    <string name="pref_password_specialChars">Special chars</string>
+    <string name="pref_password_specialChars_EXTRA">Additional special chars</string>
+    <string name="pref_password_specialChars_description">Add some special chars for you\'re password</string>
+    <string name="title_activity_settings">Settings</string>
+    <string-array name="pref_password_letters_list_titles">
+        <item>small letters</item>
+        <item>large letters</item>
+        <item>mixed letters</item>
+    </string-array>
 </resources>

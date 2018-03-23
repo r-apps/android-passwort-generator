@@ -9,4 +9,21 @@
     <string name="title_noPasswordName">Unbenannt</string>
     <string name="title_settings">Einstellungen</string>
     <string name="toast_passwordCopied">Password wurde kopiert!</string>
+    <string name="cab_delete">Elemente löschen</string>
+    <string name="pref_header_general">Allgemein</string>
+    <string name="pref_password_length">Passwortlänge</string>
+    <string name="pref_password_letters">Buchstaben</string>
+    <string name="pref_password_numbers">Zahlen verfügbar</string>
+    <string name="pref_password_numbers_description">Soll das Passwort Nummern beinhalten?</string>
+    <string name="pref_password_specialChars">Sonderzeichen</string>
+    <string name="pref_password_specialChars_EXTRA">Weitere Sonderzeichen</string>
+    <string name="pref_password_specialChars_description">Geben Sie hier weitere Zeichen an, die Ihr Passwort beinhalten
+        soll
+    </string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string-array name="pref_password_letters_list_titles">
+        <item>Kleine Buchstaben</item>
+        <item>Große Buchstaben</item>
+        <item>Gemischte Buchstaben</item>
+    </string-array>
 </resources>

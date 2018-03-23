@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rubeens Passwortgenerator</string>
+    <string name="app_name_heading">Der Passwortgenerator</string>
+    <string name="contentHome_btnCopyText">Kopieren</string>
+    <string name="contentHome_btnNewText">Neues Passwort</string>
+    <string name="title_generatedPasswords">Erstellte Passwörter</string>
+    <string name="title_home">Startseite</string>
+    <string name="title_noPasswordName">Unbenannt</string>
+    <string name="title_settings">Einstellungen</string>
+    <string name="toast_passwordCopied">Password wurde kopiert!</string>
+</resources>

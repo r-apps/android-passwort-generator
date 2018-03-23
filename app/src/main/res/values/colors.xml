@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#EE7700</color>
+    <color name="colorToolbarHeading">#FFF</color>
+    <color name="colorContentBackground">#BBB</color>
+    <color name="colorContentBackgroundLighter">#e6e6e6</color>
+
+
+    <color name="colorToolbarBackground">@color/colorAccent</color>
+
+    <!--<color name="colorContentHistoryBackground">@color/colorContentBackground</color>
+    <color name="colorContentHomeBackground">@color/colorContentBackground</color>
+    <color name="colorContentSettingsBackground">@color/colorContentBackground</color>-->
+
+    <color name="colorContentHistoryBackground">@color/colorContentBackground</color>
+    <color name="colorContentHomeBackground">@color/colorPrimaryDark</color>
+    <color name="colorContentSettingsBackground">@color/colorPrimary</color>
+    <color name="colorEditTextForeground">#fff</color>
+</resources>

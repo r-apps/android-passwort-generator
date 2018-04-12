@@ -17,24 +17,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
+import de.rubeen.apps.android.passwortgenerator.Persistence.PasswordCatalogDatabase;
 import de.rubeen.apps.android.passwortgenerator.Persistence.PasswordHistoryDatabase;
 import de.rubeen.apps.android.passwortgenerator.logic.IPasswordObject;
 import de.rubeen.apps.android.passwortgenerator.logic.PasswordGenerator;
+import de.rubeen.apps.android.passwortgenerator.logic.PasswordObject;
+
+import java.time.LocalDateTime;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO: Settings
     //TODO: Expand
 
-    private final int length = 15;
     private final History history = History.getInstance();
-    private View layout_home, layout_history, layout_settings;
+    private final Catalog catalog = Catalog.getInstance();
+    private View layout_home, layout_history, layout_settings, layout_catalog;
     private String mToolbarTitle;
     private BottomNavigationView navigation;
-    private EditText passwordBox;
+    private EditText passwordBox, saveBox;
     private PasswordGenerator generator = new PasswordGenerator();
-    private PasswordHistoryDatabase database;
+    private PasswordHistoryDatabase databaseHistory;
+    private PasswordCatalogDatabase databaseCatalog;
     private HistoryAdapter historyAdapter;
+    private CatalogAdapter catalogAdapter;
     private SharedPreferences preferences;
 
 
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         //TEST:
 //        PasswordGenerator generator = new PasswordGenerator();
 //        for (int i = 0; i < 10; i++) {
-//            database.put(generator.generatePassword(i));
+//            databaseHistory.put(generator.generatePassword(i));
 //        }
 
         loadContents();
@@ -92,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                             if (touchedPositions.valueAt(i)) {
                                 int position = touchedPositions.keyAt(i);
                                 IPasswordObject passwordObject = (IPasswordObject) listView.getItemAtPosition(position);
-                                database.delete(passwordObject);
+                                databaseHistory.delete(passwordObject);
                             }
                         }
                         history.resetPasswordObjects();
@@ -118,16 +123,25 @@ public class MainActivity extends AppCompatActivity {
             ExpandableListView list = findViewById(R.id.expandedHistoryList);
             list.collapseGroup(i);
         }
+
+        count = catalogAdapter.getGroupCount();
+        for (int i = 0; i < count; i++) {
+            ExpandableListView listView = findViewById(R.id.expandedCatalogList);
+            listView.collapseGroup(i);
+        }
     }
 
     private void setupDatabase() {
-        database = history.getDatabase(this);
-        database.open();
+        databaseHistory = history.getDatabase(this);
+        databaseHistory.open();
+
+        databaseCatalog = catalog.getDatabase(this);
+        databaseCatalog.open();
     }
 
-
     private void loadContents() {
-        history.addPasswordObjects(database.getAll(), this);
+        history.addPasswordObjects(databaseHistory.getAll(), this);
+        catalog.addPasswordObjects(databaseCatalog.getAll(), this);
     }
 
     private Toolbar setupToolbar(Toolbar toolbar) {
@@ -162,10 +176,18 @@ public class MainActivity extends AppCompatActivity {
             }).start();
             view.animate().rotationBy(360).setDuration(800).start();
         });
+        findViewById(R.id.contentHome_passwordSave).setOnClickListener(view -> {
+            findViewById(R.id.content_new_password).setVisibility(View.VISIBLE);
+        });
+        findViewById(R.id.content_new_password_save).setOnClickListener(view -> {
+            savePassword();
+            findViewById(R.id.content_new_password).setVisibility(View.GONE);
+        });
         navigation.setOnNavigationItemSelectedListener(menuItem -> {
             layout_home.setVisibility(View.GONE);
             layout_history.setVisibility(View.GONE);
             layout_settings.setVisibility(View.GONE);
+            layout_catalog.setVisibility(View.GONE);
 
             switch (menuItem.getItemId()) {
                 case R.id.navigation_home:
@@ -174,6 +196,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_generatedPasswords:
                     layout_history.setVisibility(View.VISIBLE);
                     collapseHistory();
+                    return true;
+                case R.id.navigation_catalog:
+                    layout_catalog.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_settings:
                     layout_settings.setVisibility(View.VISIBLE);
@@ -185,6 +210,14 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    private void savePassword() {
+        String title = ((EditText) findViewById(R.id.content_new_password_title)).getText().toString();
+        String description = ((EditText) findViewById(R.id.content_new_password_description)).getText().toString();
+        String password = ((EditText) findViewById(R.id.content_new_password_password)).getText().toString();
+        PasswordObject object = new PasswordObject(title, description, password, LocalDateTime.now(), -1);
+        Catalog.getInstance().addPasswordObject(object, this);
     }
 
     /**
@@ -213,8 +246,10 @@ public class MainActivity extends AppCompatActivity {
         layout_home = findViewById(R.id.content_home);
         layout_history = findViewById(R.id.content_savedPasswords);
         layout_settings = findViewById(R.id.content_settings);
+        layout_catalog = findViewById(R.id.content_catalog);
         navigation = findViewById(R.id.navigation);
         passwordBox = findViewById(R.id.contentHome_passwordBox);
+        saveBox = findViewById(R.id.content_new_password_password);
         setupWidgetListener();
     }
 
@@ -227,6 +262,10 @@ public class MainActivity extends AppCompatActivity {
         ExpandableListView listView = findViewById(R.id.expandedHistoryList);
         historyAdapter = new HistoryAdapter(this);
         listView.setAdapter(historyAdapter);
+
+        listView = findViewById(R.id.expandedCatalogList);
+        catalogAdapter = new CatalogAdapter(this);
+        listView.setAdapter(catalogAdapter);
     }
 
     private void loadPasswords(int size) {
@@ -255,5 +294,6 @@ public class MainActivity extends AppCompatActivity {
                 generator.generatePassword(length, isNumbers, isSmallChars, isLargeChars, isSpecialChars, extraChars);
         history.addPasswordObject(passwordObject, this);
         passwordBox.setText(passwordObject.getPassword());
+        saveBox.setText(passwordObject.getPassword());
     }
 }

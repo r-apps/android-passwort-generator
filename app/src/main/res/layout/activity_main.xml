@@ -9,6 +9,7 @@
     <include android:id="@+id/content_home" style="@style/content" layout="@layout/content_home" />
     <include android:id="@+id/content_savedPasswords" style="@style/content" layout="@layout/content_history" />
     <include android:id="@+id/content_settings" style="@style/content" layout="@layout/content_settings" />
+    <include android:id="@+id/content_catalog" style="@style/content" layout="@layout/content_catalog" />
 
     <android.support.design.widget.BottomNavigationView android:id="@+id/navigation" android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"

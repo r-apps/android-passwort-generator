@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
-             android:layout_height="match_parent" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_height="match_parent"
              android:background="@color/colorContentHomeBackground">
     <Button android:id="@+id/contentHome_btnStart"
             android:background="@drawable/ic_autorenew_black_48px" android:backgroundTint="@color/colorAccent"
@@ -28,6 +28,14 @@
                         android:layout_weight="1"
                         android:text="@string/contentHome_btnCopyText"/>
             </LinearLayout>
+
+            <Button android:id="@+id/contentHome_passwordSave" android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp" android:layout_marginLeft="5dp"
+                    android:text="@string/contentHome_btnSaveText" android:layout_marginBottom="10dp" />
+
+            <include android:id="@+id/content_new_password" style="@style/content"
+                     layout="@layout/content_new_password" android:visibility="gone"  />
         </LinearLayout>
     </FrameLayout>
 

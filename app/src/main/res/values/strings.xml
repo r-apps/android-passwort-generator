@@ -21,6 +21,12 @@
     <string name="pref_password_letters">!password_letters</string>
     <string name="pref_password_specialChars">!special_Chars</string>
     <string name="pref_password_specialChars_description">!Special_Chars Description</string>
+    <string name="contentHome_btnSaveText">!save_password</string>
+    <string name="title_catalog">!catalog</string>
+    <string name="new_Title">!Title</string>
+    <string name="new_Description">!Description</string>
+    <string name="new_Password">!Password</string>
+    <string name="new_save">!Save</string>
 
     <string-array name="pref_password_letters_list_titles">
         <item>!small_Letters</item>

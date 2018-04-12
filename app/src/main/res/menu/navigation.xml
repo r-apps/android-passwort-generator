@@ -12,8 +12,14 @@
         android:title="@string/title_generatedPasswords"/>
 
     <item
+            android:id="@+id/navigation_catalog"
+            android:icon="@drawable/ic_folder_black_24dp"
+            android:title="@string/title_catalog"/>
+
+    <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_settings_black_48dp"
         android:title="@string/title_settings"/>
+
 
 </menu>
